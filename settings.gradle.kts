@@ -11,3 +11,4 @@ buildscript {
     }
 }
 bootstrapRefreshVersionsAndDependencies(justAdditionalAliases)
+rootProject.name = "Template-for-Kotlin-Gradle-Projects"

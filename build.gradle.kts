@@ -1,18 +1,21 @@
 plugins {
+    `java-library`
     kotlin("multiplatform")
+    `maven-publish`
+    signing
     id("org.danilopianini.git-sensitive-semantic-versioning")
 }
+
+apply(plugin = "org.danilopianini.git-sensitive-semantic-versioning")
 
 group = "org.danilopianini"
 gitSemVer {
     version = computeGitSemVer()
 }
 
-
 repositories {
     mavenCentral()
 }
-
 
 kotlin {
     sourceSets {
@@ -71,6 +74,22 @@ kotlin {
                 kotlinOptions {
                     allWarningsAsErrors = true
                     freeCompilerArgs = listOf("-XXLanguage:+InlineClasses", "-Xopt-in=kotlin.RequiresOptIn")
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        withType<MavenPublication> {
+            pom {
+                developers {
+                    developer {
+                        name.set("Danilo Pianini")
+                        email.set("danilo.pianini@gmail.com")
+                        url.set("http://www.danilopianini.org/")
+                    }
                 }
             }
         }
